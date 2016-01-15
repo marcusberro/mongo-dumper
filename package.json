@@ -1,0 +1,29 @@
+{
+  "name": "mongo-dumper",
+  "version": "1.0.0",
+  "description": "Dump and restore single MongoDB instance, Replica set and Sharded cluster",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcusberro/mongo-dumper.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "shell",
+    "script",
+    "mongodump",
+    "mongorestore"
+  ],
+  "author": "Marcus Berro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcusberro/mongo-dumper/issues"
+  },
+  "homepage": "https://github.com/marcusberro/mongo-dumper#readme",
+  "dependencies": {
+    "mongodb": "^2.1.4"
+  }
+}
