@@ -1,6 +1,6 @@
 'use strict';
 
-var Dumper = require('../').Dumper;
+var Dumper = require('../').CommandLineDumper;
 
 var settings = {
 	hosts: 'localhost:27023,localhost:27024,localhost:27025',
