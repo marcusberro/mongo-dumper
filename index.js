@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-    Dumper : require('./src/dumper')
+    CommandLineDumper : require('./src/command-line-dumper')
 };

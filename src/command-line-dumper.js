@@ -3,25 +3,29 @@
 var assert = require('assert');
 var childProcess = require('child_process');
 
-function Dumper(dumpSettings) {
+function CommandLineDumper(dumpSettings) {
     assert.notEqual(dumpSettings, null);
+
+    // TODO check if it is mandatory
     assert.notEqual(dumpSettings.hosts, null);
 
     this.hosts = dumpSettings.hosts;
     this.authentication = dumpSettings.authentication;
     this.db = dumpSettings.db;
+
+    // TODO validate output
     this.output = dumpSettings.output;
 };
 
-Dumper.prototype.dump = function(){
+CommandLineDumper.prototype.dump = function(){
     var mongodump = childProcess.exec(this.buildCommand(), function (error, stdout, stderr) {
         if (error) {
             console.log(error.stack);
             console.log('Error code: '+error.code);
             console.log('Signal received: '+error.signal);
         }
-        console.log('Child Process STDOUT: '+stdout);
-        console.log('Child Process STDERR: '+stderr);
+        console.log('Child Process STDOUT: \n'+stdout);
+        console.log('Child Process STDERR: \n'+stderr);
 
     });
 
@@ -30,7 +34,7 @@ Dumper.prototype.dump = function(){
     });
 }
 
-Dumper.prototype.buildCommand = function(){
+CommandLineDumper.prototype.buildCommand = function(){
     var command = 'mongodump';
 
     command += ' --host ' + this.hosts;
@@ -65,4 +69,4 @@ Dumper.prototype.buildCommand = function(){
     return command;
 }
 
-module.exports = Dumper;
+module.exports = CommandLineDumper;
