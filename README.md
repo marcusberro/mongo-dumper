@@ -44,22 +44,22 @@ Build a shell to mongodump and mongorestore tools.
 ##### Dump options
 ```json 
  {
- 	hosts : "",
-	authentication : {
-		user : "",
-		password : "",
-		database : ""
+ 	"hosts" : "",
+	"authentication" : {
+		"user" : "",
+		"password" : "",
+		"database" : ""
 	},
-	db : {
-		name : "",
-		collection : {
-			name : "",
-			query : ""
+	"db" : {
+		"name" : "",
+		"collection" : {
+			"name" : "",
+			"query" : ""
 		}
 	},
-	output : {
-		filepath : "",
-		compression: ""
+	"output" : {
+		"filepath" : "",
+		"compression": ""
 	}
  }
 ```
