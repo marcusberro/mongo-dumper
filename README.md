@@ -63,19 +63,19 @@ Build a shell to mongodump and mongorestore tools.
 	}
  }
 ```
-* **hosts** - in case of replica set it is a comma separated list of hosts. Otherwise, a single host (default:localhost: 27017)
-* **authentication** - Secure database authentication
-** user - username
-** password - password
-** database - authentication database (default: admin)
-* **db** - specific database
-** name - db name
-** collection - specific collection
-*** name - collection name
-*** query - backup a slice of data
-* **output** - output backup files
-** filepath - where to drop backup files (default: dump)
-** compression - only tar.gz available so far
+- **hosts** - in case of replica set it is a comma separated list of hosts. Otherwise, a single host (default:localhost: 27017)
+- **authentication** - Secure database authentication
+-- user - username
+-- password - password
+-- database - authentication database (default: admin)
+- **db** - specific database
+-- name - db name
+-- collection - specific collection
+--- name - collection name
+--- query - backup a slice of data
+- **output** - output backup files
+-- filepath - where to drop backup files (default: dump)
+-- compression - only tar.gz available so far
 
 ##### Sample usage
 ```javascript
