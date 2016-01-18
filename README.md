@@ -1,7 +1,7 @@
 # mongo-dumper
 > Dump and restore single MongoDB instance and Replica set in Node.js
 
-## **Under construction project**
+**Under construction project**
 
 Mongo-dumper provides ground for writing Node.js code focused on dumping and restoring Mongo Databases. It is based on the concept of a Dumper, a vehicle designed for carrying bulk material, often on building sites. We provide some kinds of Dumpers: DatabaseToFileDumper, FileToDatabaseDumper(TODO) and DatabaseToDatabaseDumper(TODO). In other words, load a Dumper with settings and call transport() to make it happen.
 
@@ -34,7 +34,7 @@ var mongoDumper = new Dumper(settings);
 mongoDumper.transport();
 ```
 
-### Dumper objects
+### Dumpers
 Dumper objects contain one main function: transport. They receive a settings object when instanciated, each one validated accordingly to Dumper type object:
 
 ```javascript
@@ -114,16 +114,8 @@ mongoDumper.transport();
 
 #### FileToDatabaseDumper
 **TODO**
-##### Dumper settings
-**TODO**
-##### Sample usage
-**TODO**
 
 #### DatabaseToDatabaseDumper
-**TODO**
-##### Dumper settings
-**TODO**
-##### Sample usage
 **TODO**
 
 ## CLI tool and Docker
