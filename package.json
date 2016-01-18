@@ -1,7 +1,7 @@
 {
   "name": "mongo-dumper",
-  "version": "0.0.1",
-  "description": "Dump and restore single MongoDB instance, Replica set and Sharded cluster",
+  "version": "0.0.2",
+  "description": "Dump and restore single MongoDB instance and Replica set",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/marcusberro/mongo-dumper#readme",
   "dependencies": {
+    "moment": "^2.11.1",
     "mongodb": "^2.1.4"
   }
 }

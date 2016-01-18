@@ -8,6 +8,10 @@ var settings = {
 		database : 'admin',
 		user : 'dbAdmin',
 		password : 'dbAdmin'
+	},
+	output: {
+		timestampLabel : 'YYYY-MM-DD_HH-mm-ss',
+		prefix : 'lambda'
 	}
 };
 
