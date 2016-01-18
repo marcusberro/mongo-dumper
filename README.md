@@ -4,9 +4,11 @@
 **Under construction project**
 
 Mongo-dumper provides ground for writing Node.js code focused on dumping and restoring Mongo Databases. It is based on the concept of a Dumper, a vehicle designed for carrying bulk material. Considering that idea, we provide some kinds of Dumpers: 
+
 - DatabaseToFileDumper
 - FileToDatabaseDumper(TODO)
-- DatabaseToDatabaseDumper(TODO) 
+- DatabaseToDatabaseDumper(TODO)
+
 In other words, load a Dumper with settings and call transport() to make it happen!
 
 ## Awesome features
