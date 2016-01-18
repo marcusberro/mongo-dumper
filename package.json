@@ -1,6 +1,6 @@
 {
   "name": "mongo-dumper",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Dump and restore single MongoDB instance and Replica set",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "mongo-dumper",
     "mongodump",
     "mongorestore",
-    "node mongo dump and restore framework"
+    "node.js mongo backup framework"
   ],
   "author": "Marcus Berro",
   "license": "MIT",
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/marcusberro/mongo-dumper#readme",
   "dependencies": {
-    "moment": "^2.11.1",
-    "mongodb": "^2.1.4"
+    "moment": "^2.11.1"
   }
 }

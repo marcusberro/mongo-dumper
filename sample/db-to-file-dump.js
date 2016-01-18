@@ -1,6 +1,6 @@
 'use strict';
 
-var Dumper = require('../').CommandLineDumper;
+var Dumper = require('../').DatabaseToFileDumper;
 
 var settings = {
 	hosts: 'localhost:27023,localhost:27024,localhost:27025',
@@ -17,4 +17,4 @@ var settings = {
 
 var mongoDumper = new Dumper(settings);
 
-mongoDumper.dump();
+mongoDumper.transport();

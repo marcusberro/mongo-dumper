@@ -3,9 +3,9 @@
 
 ## **Under construction project**
 
-Mongo-dumper provides ground for writing Node.js code focused on dumping and restoring Mongo Databases
+Mongo-dumper provides ground for writing Node.js code focused on dumping and restoring Mongo Databases. It is based on the concept of a Dumper, a vehicle designed for carrying bulk material, often on building sites. We provide some kinds of Dumpers: DatabaseToFileDumper, FileToDatabaseDumper(TODO) and DatabaseToDatabaseDumper(TODO). In other words, load a Dumper with settings and call transport() to make it happen.
 
-## Features
+## Awesome features
 * **single instance and replica set support** - make a hot backup on them
 * **timestamp labeled backup files** - output files are saved with a moment.js timestamp reference
 * **log files** - generate log files for each backup
@@ -19,31 +19,40 @@ npm install mongo-dumper --save
 ```
 ```javascript
 var Dumper = require('mongo-dumper').SomeDumper;
+
+var settings = {
+	hosts: 'localhost:27017,localhost:27018,localhost:27019',
+	authentication : {
+		database : 'admin',
+		user : 'dbAdmin',
+		password : 'dbAdmin'
+	}
+};
+
+var mongoDumper = new Dumper(settings);
+
+mongoDumper.transport();
 ```
 
 ### Dumper objects
-Dumper objects contain two main functions: dump and restore. They receive some backup options when instanciated, each one validated accordingly to Dumper type object:
+Dumper objects contain one main function: transport. They receive a settings object when instanciated, each one validated accordingly to Dumper type object:
 
 ```javascript
-function SomeDumper(dumpSettings) {
-	// validate dump settings
+function SomeDumper(dumperSettings) {
+	// validate dumper settings
 };
 
-SomeDumper.prototype.dump = function(){
+SomeDumper.prototype.transport = function(){
 	// dump process
-}
-
-SomeDumper.prototype.restore = function(){
-	// restore process
 }
 ```
 
-#### CommandLineDumper
-Build a shell to mongodump and mongorestore tools.
+#### DatabaseToFileDumper
+Makes a backup of datatbase into the filesystem. It is built as a wrapper of mongodump tool.
 
-##### Dump settings
+##### Dumper settings
 ```javascript
- var dumpSettings = {
+ var dumperSettings = {
  	"hosts" : "",
 	"authentication" : {
 		"user" : "",
@@ -83,36 +92,48 @@ Build a shell to mongodump and mongorestore tools.
 
 ##### Sample usage
 ```javascript
-var Dumper = require('mongo-dumper').CommandLineDumper;
+var Dumper = require('mongo-dumper').DatabaseToFileDumper;
 
 var settings = {
-	hosts: 'localhost:27017,localhost:27018,localhost:27019',
+	hosts: 'localhost:27023,localhost:27024,localhost:27025',
 	authentication : {
 		database : 'admin',
 		user : 'dbAdmin',
 		password : 'dbAdmin'
+	},
+	output: {
+		timestampLabel : 'YYYY-MM-DD_HH-mm-ss',
+		prefix : 'lambda'
 	}
 };
 
 var mongoDumper = new Dumper(settings);
 
-mongoDumper.dump();
+mongoDumper.transport();
 ```
 
-##### Restore options
+#### FileToDatabaseDumper
+**TODO**
+##### Dumper settings
+**TODO**
+##### Sample usage
 **TODO**
 
+#### DatabaseToDatabaseDumper
+**TODO**
+##### Dumper settings
+**TODO**
 ##### Sample usage
 **TODO**
 
 ## CLI tool and Docker
 **TODO**
 
+## Futures releases
+- support to delayed documemts
+- support to Sharded cluster
+- Db-to-stream dump
+
 ## License
 
 mongo-dumper is freely distributable under the terms of the [MIT license.](LICENSE)
-
-
-TODO: support to delayed documemts
-TODO: support to Sharded cluster
-TODO: Db-to-stream dump

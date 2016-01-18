@@ -5,19 +5,19 @@ var moment = require('moment');
 var fs = require('fs');
 
 
-function CommandLineDumper(dumpSettings) {
+function DatabaseToFileDumper(dumperSettings) {
     
-    this.hosts = dumpSettings.hosts;
-    this.authentication = dumpSettings.authentication;
-    this.db = dumpSettings.db;
-    this.output = dumpSettings.output;
+    this.hosts = dumperSettings.hosts;
+    this.authentication = dumperSettings.authentication;
+    this.db = dumperSettings.db;
+    this.output = dumperSettings.output;
 };
 
-CommandLineDumper.prototype.dump = function(){
+DatabaseToFileDumper.prototype.transport = function(){
     
-    var commandLineDumpAssets = this.buildAssets();
+    var dumperAssets = this.loadAssets();
     
-    var mongodump = childProcess.exec(commandLineDumpAssets.command, function (error, stdout, stderr) {
+    var mongodump = childProcess.exec(dumperAssets.command, function (error, stdout, stderr) {
 
         if (error)
             throw(error);
@@ -28,7 +28,7 @@ CommandLineDumper.prototype.dump = function(){
 
         console.log(output);
 
-        fs.writeFile(commandLineDumpAssets.fullPath + '.log', output, function(err) {
+        fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
             
             if(err) 
                 throw(err);
@@ -41,30 +41,9 @@ CommandLineDumper.prototype.dump = function(){
        
        console.log('Child process exited with exit code '+code);
     });
-}
+};
 
-CommandLineDumper.prototype.restore = function(){
-    
-    var mongorestore = childProcess.exec("ls -l", function (error, stdout, stderr) {
-        
-        if (error) {
-            console.log(error.stack);
-            console.log('Error code: '+error.code);
-            console.log('Signal received: '+error.signal);
-        }
-        
-        console.log('Child Process STDOUT: \n'+stdout);
-        console.log('Child Process STDERR: \n'+stderr);
-
-    });
-
-    mongorestore.on('exit', function (code) {
-       
-       console.log('Child process exited with exit code '+code);
-    });
-}
-
-CommandLineDumper.prototype.buildAssets = function(timestampLabel){
+DatabaseToFileDumper.prototype.loadAssets = function(){
     
     var dumpAssets = { command : 'mongodump' };
 
@@ -127,6 +106,6 @@ CommandLineDumper.prototype.buildAssets = function(timestampLabel){
     } 
 
     return dumpAssets;
-}
+};
 
-module.exports = CommandLineDumper;
+module.exports = DatabaseToFileDumper;
