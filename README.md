@@ -59,7 +59,7 @@ Makes a backup of datatbase into the filesystem. It is built as a wrapper of mon
  var dumperSettings = {
  	"hosts" : "",
 	"authentication" : {
-		"user" : "",
+		"user" : "",			// if authentication exists, default admin
 		"password" : "",
 		"database" : ""
 	},
@@ -71,10 +71,10 @@ Makes a backup of datatbase into the filesystem. It is built as a wrapper of mon
 		}
 	},
 	"output" : {
-		"prefix" : "",
+		"prefix" : "",			// default dump
 		"filepath" : "",
-		"timestampLabel" : "",
-		"compression": "tar.gz"
+		"timestampLabel" : "", 	// moment.js format e.g. 'YYYY-MM-DD_HH-mm-ss'
+		"compression": "" 		// tar.gz available
 	}
  }
 ```
@@ -128,7 +128,7 @@ mongoDumper.transport();
 ## Dependencies
 - npm
 - mongodb or docker
-- Compression works in Linux (calling tar command)
+- Compression works only in Linux (calling tar command)
 
 ## Futures releases
 - support to delayed documemts
