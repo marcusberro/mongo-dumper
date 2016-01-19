@@ -14,32 +14,63 @@ function DatabaseToFileDumper(dumperSettings) {
 };
 
 DatabaseToFileDumper.prototype.transport = function(){
-    
+
     var dumperAssets = this.loadAssets();
-    
-    var mongodump = childProcess.exec(dumperAssets.command, function (error, stdout, stderr) {
 
-        if (error)
-            throw(error);
-    
-        var output = 
-            'Child Process STDERR: \n'+stderr +'\n\n';
-             + 'Child Process STDOUT: \n'+stdout;
+    childProcess.exec(dumperAssets.command, function (error, stdout, stderr) {
 
-        console.log(output);
+        var output = 'mongodump STDERR: \n' + stderr +'\n\n';
+        
+        output += 'mongodump STDOUT: \n' + stdout +'\n\n';
 
-        fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
+        if (error !== null) {
+            output += 'mongodump exec error: \n' + error + '\n\n';
+
+            console.log(output);
+
+            fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
+
+                if(err) 
+                    throw(err);
+
+                console.log("LOG was saved!");
+            }); 
+        } else {
+            if(dumperAssets.compressionCommand){
+
+                childProcess.exec(dumperAssets.compressionCommand, function (error, stdout, stderr) {
+                    
+                    output += 'Compression STDERR: \n' + stderr + '\n\n';
             
-            if(err) 
-                throw(err);
+                    output += 'Compression STDOUT: \n' + stdout + '\n\n';
 
-            console.log("LOG was saved!");
-        }); 
-    });
+                    if (error !== null) {
+                        output += 'Compression exec error: \n' + error + '\n\n';
+                    }
 
-    mongodump.on('exit', function (code) {
-       
-       console.log('Child process exited with exit code '+code);
+                    console.log(output);
+
+                    fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
+
+                        if(err) 
+                            throw(err);
+
+                        console.log("LOG was saved!");
+                    }); 
+                });    
+            } else {
+                
+                console.log(output);
+
+                fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
+
+                    if(err) 
+                        throw(err);
+
+                    console.log("LOG was saved!");
+                }); 
+            }
+        }
     });
 };
 
@@ -101,6 +132,13 @@ DatabaseToFileDumper.prototype.loadAssets = function(){
 
             dumpAssets.fullPath += '_' + moment().format(this.output.timestampLabel);
         } 
+
+        if(this.output.compression === 'tar.gz'){
+
+            dumpAssets.compressionCommand = 
+                'tar -zcvf '+dumpAssets.fullPath+'.tar.gz '+
+                dumpAssets.fullPath;
+        }
 
         dumpAssets.command += ' --out ' + dumpAssets.fullPath;
     } 

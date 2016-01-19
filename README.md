@@ -1,8 +1,6 @@
 # mongo-dumper
 > Dump and restore single MongoDB instance and Replica set in Node.js
 
-**Under construction project**
-
 Mongo-dumper provides ground for writing Node.js code focused on dumping and restoring Mongo Databases. It is based on the concept of a Dumper, a vehicle designed for carrying bulk material. Considering that idea, we provide some kinds of Dumpers: 
 
 - DatabaseToFileDumper
@@ -15,7 +13,7 @@ In other words, load a Dumper with settings and call transport() to make it happ
 * **single instance and replica set support** - make a hot backup on them
 * **timestamp labeled backup files** - output files are saved with a moment.js timestamp reference
 * **log files** - generate log files for each backup
-* **compression** - tar.gz (TODO)
+* **compression** - tar.gz (Linux only)
 * **authentication** - dump secure MongoDbs
 
 ## Usage
@@ -76,7 +74,7 @@ Makes a backup of datatbase into the filesystem. It is built as a wrapper of mon
 		"prefix" : "",
 		"filepath" : "",
 		"timestampLabel" : "",
-		"compression": ""
+		"compression": "tar.gz"
 	}
  }
 ```
@@ -94,7 +92,7 @@ Makes a backup of datatbase into the filesystem. It is built as a wrapper of mon
    - prefix - file/folder prefix (default: dump)
    - filepath - where to drop backup files (default: source path)
    - timestampLabel - moment.js timestamp label (e.g. 'YYYY-MM-DD_HH-mm-ss' = 'prefix_2016-01-18_01-39-03')
-   - compression - TODO - only tar.gz available
+   - compression - tar.gz available and **linux only supported**
 
 ##### Sample usage
 ```javascript
@@ -130,11 +128,14 @@ mongoDumper.transport();
 ## Dependencies
 - npm
 - mongodb or docker
+- Compression works in Linux (calling tar command)
 
 ## Futures releases
 - support to delayed documemts
 - support to Sharded cluster
 - Db-to-stream dump
+- checksum
+- Docker Dumper (do not need mongo installed)
 
 ## License
 

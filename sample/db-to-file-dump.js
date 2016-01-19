@@ -11,7 +11,8 @@ var settings = {
 	},
 	output: {
 		timestampLabel : 'YYYY-MM-DD_HH-mm-ss',
-		prefix : 'lambda'
+		prefix : 'lambda',
+		compression : 'tar.gz'
 	}
 };
 
