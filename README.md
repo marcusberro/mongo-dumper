@@ -47,7 +47,7 @@ function SomeDumper(dumperSettings) {
 };
 
 SomeDumper.prototype.transport = function(){
-	// dump process
+	// dump, restore or both
 }
 ```
 
