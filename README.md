@@ -126,7 +126,6 @@ mongoDumper.transport();
 **TODO**
 
 ## Dependencies
-- npm
 - mongodb or docker
 - Compression works only in Linux (calling tar command)
 
