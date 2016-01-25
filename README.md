@@ -116,6 +116,22 @@ var mongoDumper = new Dumper(settings);
 mongoDumper.transport();
 ```
 
+##### Setting Environment Variables
+Environment Variables have higher priority. There is some options available so far:
+- **DUMPER_HOSTS** - Same as config file
+- **DUMPER_AUTH** - if true search for environment authentication variable
+- **DUMPER_AUTH_DB** - Same as config file
+- **DUMPER_AUTH_USER** - Same as config file
+- **DUMPER_AUTH_PASSWORD** - Same as config file
+
+```bash
+DUMPER_HOSTS=localhost:27017,localhost:27018,localhost:27019 / 
+DUMPER_AUTH=true / 
+DUMPER_AUTH_USER=dbAdmin / 
+DUMPER_AUTH_PASSWORD=dbAdmin / 
+node index.js
+```
+
 #### FileToDatabaseDumper
 **TODO**
 

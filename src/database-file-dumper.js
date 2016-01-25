@@ -78,17 +78,37 @@ DatabaseToFileDumper.prototype.loadAssets = function(){
     
     var dumpAssets = { command : 'mongodump' };
 
-    if(this.hosts) {
+    if(process.env.DUMPER_HOSTS){
+        
+        dumpAssets.command += ' --host ' + process.env.DUMPER_HOSTS;
+
+    } else if(this.hosts) {
 
         dumpAssets.command += ' --host ' + this.hosts;
     }
 
-    if(this.authentication){
+    if(this.authentication || (process.env.DUMPER_AUTH && process.env.DUMPER_AUTH === 'true') ){
 
-        dumpAssets.command += ' --authenticationDatabase ' + this.authentication.database || 'admin';
-        dumpAssets.command += ' --username ' + this.authentication.user;
+        if(process.env.DUMPER_AUTH_DB){
 
-        if(this.authentication.password){
+            dumpAssets.command += ' --authenticationDatabase ' + process.env.DUMPER_AUTH_DB;
+
+        } else if(this.authentication && this.authentication.database){
+
+            dumpAssets.command += ' --authenticationDatabase ' + this.authentication.database;
+
+        } else {
+
+            dumpAssets.command += ' --authenticationDatabase admin';
+        }
+
+        dumpAssets.command += ' --username ' + process.env.DUMPER_AUTH_USER || this.authentication.user;
+
+        if(process.env.DUMPER_AUTH_PASSWORD){
+
+            dumpAssets.command += ' --password ' + process.env.DUMPER_AUTH_PASSWORD;
+
+        } else if(this.authentication && this.authentication.password){
 
             dumpAssets.command += ' --password ' + this.authentication.password;
         }
