@@ -34,6 +34,8 @@ DatabaseToFileDumper.prototype.transport = function(){
                     throw(err);
 
                 console.log("LOG was saved!");
+
+                process.exit(1);
             }); 
         } else {
             if(dumperAssets.compressionCommand){
@@ -56,6 +58,8 @@ DatabaseToFileDumper.prototype.transport = function(){
                             throw(err);
 
                         console.log("LOG was saved!");
+
+                        process.exit(1);
                     }); 
                 });    
             } else {
