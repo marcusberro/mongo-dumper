@@ -47,20 +47,32 @@ DatabaseToFileDumper.prototype.transport = function(){
                     output += 'Compression STDOUT: \n' + stdout + '\n\n';
 
                     if (error !== null) {
+
                         output += 'Compression exec error: \n' + error + '\n\n';
+
+                        console.log(output);
+
+                        fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
+
+                            if(err) 
+                                throw(err);
+
+                            console.log("Error LOG was saved!");
+
+                            process.exit(1);
+                        }); 
+                    } else {
+
+                        console.log(output);
+
+                        fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
+
+                            if(err) 
+                                throw(err);
+
+                            console.log("LOG was saved!");
+                        });     
                     }
-
-                    console.log(output);
-
-                    fs.writeFile(dumperAssets.fullPath + '.log', output, function(err) {
-
-                        if(err) 
-                            throw(err);
-
-                        console.log("LOG was saved!");
-
-                        process.exit(1);
-                    }); 
                 });    
             } else {
                 
