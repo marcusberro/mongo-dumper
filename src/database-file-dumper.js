@@ -117,9 +117,11 @@ DatabaseToFileDumper.prototype.loadAssets = function(){
 
             dumpAssets.command += ' --authenticationDatabase admin';
         }
-
-        dumpAssets.command += ' --username ' + process.env.DUMPER_AUTH_USER || this.authentication.user;
-
+        if (process.env.DUMPER_AUTH_USER) {
+            dumpAssets.command += ' --username ' + process.env.DUMPER_AUTH_USER;
+        } else if (this.authentication && this.authentication.user) {
+            dumpAssets.command += ' --username ' + this.authentication.user;
+        }
         if(process.env.DUMPER_AUTH_PASSWORD){
 
             dumpAssets.command += ' --password ' + process.env.DUMPER_AUTH_PASSWORD;
